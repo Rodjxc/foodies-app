@@ -8,6 +8,7 @@ export default function MealItem({ title, slug, image, summary, creator }) {
 		<article className={classes.meal}>
 			<header>
 				<div className={classes.image}>
+					{/* The fill prop is specific to the Image from Next JS to not have to set manually the height and width */}
 					<Image src={image} alt={title} fill />
 				</div>
 				<div className={classes.headerText}>
