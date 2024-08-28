@@ -1,8 +1,14 @@
 import MealsGrid from "@/components/meals/meals-grid";
 import classes from "./page.module.css";
 import Link from "next/link";
+import { getMeals } from "@/lib/meals";
 
-export default function MealsPage() {
+export default async function MealsPage() {
+	// This below will call (on load) the getMeals, that will call the database and get the info. We do that instead of
+	// a useEffect or anything, since NextJS also has a backend
+
+	const meals = await getMeals();
+
 	return (
 		<>
 			<header className={classes.header}>
@@ -18,7 +24,7 @@ export default function MealsPage() {
 				</p>
 			</header>
 			<main className={classes.header}>
-				<MealsGrid meals={[]} />
+				<MealsGrid meals={meals} />
 			</main>
 		</>
 	);
