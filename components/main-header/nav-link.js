@@ -14,7 +14,11 @@ export default function NavLink({ href, children }) {
         apply the class if we're on the page*/}
 			<Link
 				href={href}
-				className={path.startsWith(href) ? classes.active : undefined}
+				className={
+					path.startsWith(href)
+						? `${classes.link} ${classes.active}`
+						: classes.link
+				}
 			>
 				{children}
 			</Link>
