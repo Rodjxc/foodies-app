@@ -1,10 +1,14 @@
-import Link from "next/link";
 import classes from "./page.module.css";
 import Image from "next/image";
 import { getMeal } from "@/lib/meals";
+import { notFound } from "next/navigation";
 
 export default function MealDetailsPage({ params }) {
 	const meal = getMeal(params.mealSlug);
+
+	if (!meal) {
+		notFound();
+	}
 
 	meal.instructions = meal.instructions.replace(/\n/g, "<br/>");
 
@@ -25,7 +29,7 @@ export default function MealDetailsPage({ params }) {
 					<p
 						className={classes.instructions}
 						dangerouslySetInnerHTML={{ __html: meal.instructions }}
-					></p>
+					/>
 				</main>
 			</header>
 		</>
