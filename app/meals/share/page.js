@@ -1,9 +1,20 @@
+"use client";
+
 import ImagePicker from "@/components/meals/image-picker";
 import classes from "./page.module.css";
 import { shareMeal } from "@/lib/action";
 import MealsFormSubmit from "../meals-form-submit";
+import { useFormState } from "react-dom";
 
 export default function ShareMealPage() {
+	// to show an error (if there is any) but keep the values the user has entered in the fields, we can use the
+	// hook useFormState (not useFormStatus). This takes 2 values: first, the actual server action that should be triggered
+	//when the form is submitted. In this case, the function shareMeal. The second, the initial state of the component.
+	// This useFormState will be destructured in 2: state (which is the current state/response of this component), and the
+	// action that will trigger it. In this case, the action of submitting the form (we replace too the action in the <form>)
+
+	const [state, formAction] = useFormState(shareMeal, { message: null });
+
 	return (
 		<>
 			<header className={classes.header}>
@@ -13,7 +24,7 @@ export default function ShareMealPage() {
 				<p>Or any other meal you feel needs sharing!</p>
 			</header>
 			<main className={classes.main}>
-				<form className={classes.form} action={shareMeal}>
+				<form className={classes.form} action={formAction}>
 					<div className={classes.row}>
 						<p>
 							<label htmlFor="name">Your name</label>
@@ -42,6 +53,8 @@ export default function ShareMealPage() {
 						/>
 					</p>
 					<ImagePicker label="Your Image" name="image" />
+					{/* This message will trigger if the state has something i.e if it's given an error */}
+					{state.message && <p>{state.message}</p>}
 					<p className={classes.actions}>
 						<MealsFormSubmit />
 					</p>
