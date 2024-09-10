@@ -4,16 +4,15 @@ import Link from "next/link";
 import { getMeals } from "@/lib/meals";
 import { Suspense } from "react";
 
+// Fetching meals inside the `Meals` function
 async function Meals() {
 	const meals = await getMeals();
 
+	// Ensure the meals data is passed to the MealsGrid component
 	return <MealsGrid meals={meals} />;
 }
 
 export default function MealsPage() {
-	// This below will call (on load) the getMeals, that will call the database and get the info. We do that instead of
-	// a useEffect or anything, since NextJS also has a backend
-
 	return (
 		<>
 			<header className={classes.header}>
