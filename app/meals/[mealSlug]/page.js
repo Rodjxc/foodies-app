@@ -37,14 +37,15 @@ export default async function MealDetailsPage({ params }) {
 					</p>
 					<p className={classes.summary}>{meal.summary}</p>
 				</div>
-				<main>
-					<p
-						className={classes.instructions}
-						// biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
-						dangerouslySetInnerHTML={{ __html: meal.instructions }}
-					/>
-				</main>
 			</header>
+
+			<main>
+				<p
+					className={classes.instructions}
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+					dangerouslySetInnerHTML={{ __html: meal.instructions }}
+				/>
+			</main>
 		</>
 	);
 }
